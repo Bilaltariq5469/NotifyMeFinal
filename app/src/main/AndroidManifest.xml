@@ -55,13 +55,13 @@
             android:exported="true" />
 
         <activity
-            android:name=".LocationBasedService"
+            android:name=".activity.LocationBasedService"
             android:label="@string/title_activity_location_based_service"></activity>
-        <activity android:name=".HomePageActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".activity.HomePageActivity" />
+        <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.AddAlarmActivity" />
         <activity android:name=".activity.AlarmMainActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
