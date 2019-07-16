@@ -1,4 +1,4 @@
-package com.example.notifyme.Models;
+package com.example.notifyme.model;
 
 public class User {
     String name;

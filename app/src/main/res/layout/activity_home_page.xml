@@ -46,14 +46,10 @@
                 android:layout_height="wrap_content"
                 android:weightSum="5">
 
-                <ImageView
-                    android:layout_weight="4.95"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp" />
 
                 <TextView
-                    android:text="Mix and Match"
-                    android:layout_weight="0.05"
+                    android:text="Set Alarm"
+                    android:layout_weight="5"
                     android:layout_gravity="center_horizontal"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
@@ -88,15 +84,10 @@
                 android:layout_height="wrap_content"
                 android:weightSum="5">
 
-                <ImageView
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="4.95"/>
 
                 <TextView
-                    android:text="Location Based Services"
-                    android:layout_weight="0.05"
+                    android:text="Location Based Alarm"
+                    android:layout_weight="5"
                     android:layout_gravity="center_horizontal"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
@@ -112,271 +103,237 @@
 
         <!-- Row 2 -->
 
-        <!--&lt;!&ndash; Column 1 &ndash;&gt;-->
-        <!--<android.support.v7.widget.CardView-->
-            <!--app:cardBackgroundColor="#F7F7F7"-->
-            <!--android:id="@+id/landscapingCard"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_columnWeight="1"-->
-            <!--android:layout_rowWeight="1"-->
-            <!--android:layout_marginBottom="16dp"-->
-            <!--android:layout_marginLeft="16dp"-->
-            <!--android:layout_marginRight="16dp"-->
-            <!--app:cardElevation="8dp"-->
-            <!--app:cardCornerRadius="8dp"-->
-            <!--&gt;-->
+        <!-- Column 1 -->
+        <android.support.v7.widget.CardView
+            app:cardBackgroundColor="#F7F7F7"
+            android:id="@+id/landscapingCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            >
 
-            <!--<LinearLayout-->
-                <!--android:layout_gravity="center_horizontal|center_vertical"-->
-                <!--android:layout_margin="16dp"-->
-                <!--android:orientation="vertical"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content">-->
-
-                <!--<ImageView-->
-                    <!--android:layout_weight="4.95"-->
-                    <!--android:src="@drawable/landscaping"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="0dp" />-->
-
-                <!--<TextView-->
-                    <!--android:text="Landscaping"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:layout_weight="0.05"-->
-                    <!--android:paddingBottom="10dp"-->
-                    <!--android:textAlignment="center"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"-->
-                    <!--android:fontFamily="@font/montserrat_regular"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
-
-            <!--</LinearLayout>-->
-
-        <!--</android.support.v7.widget.CardView>-->
-
-        <!--&lt;!&ndash; Column 2 &ndash;&gt;-->
-        <!--<android.support.v7.widget.CardView-->
-            <!--app:cardBackgroundColor="#F7F7F7"-->
-            <!--android:id="@+id/developmentCard"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_columnWeight="1"-->
-            <!--android:layout_rowWeight="1"-->
-            <!--android:layout_marginBottom="16dp"-->
-            <!--android:layout_marginLeft="16dp"-->
-            <!--android:layout_marginRight="16dp"-->
-            <!--app:cardElevation="8dp"-->
-            <!--app:cardCornerRadius="8dp"-->
-            <!--&gt;-->
-
-            <!--<LinearLayout-->
-                <!--android:layout_gravity="center_horizontal|center_vertical"-->
-                <!--android:layout_margin="16dp"-->
-                <!--android:orientation="vertical"-->
-                <!--android:weightSum="5"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content">-->
-
-                <!--<ImageView-->
-                    <!--android:src="@drawable/development"-->
-                    <!--android:layout_weight="4.95"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="0dp" />-->
-
-                <!--<TextView-->
-                    <!--android:layout_weight="0.05"-->
-                    <!--android:paddingBottom="10dp"-->
-                    <!--android:text="Development"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"-->
-                    <!--android:fontFamily="@font/montserrat_regular"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
-
-            <!--</LinearLayout>-->
-
-        <!--</android.support.v7.widget.CardView>-->
+            <LinearLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
 
-        <!--&lt;!&ndash; Row 2 &ndash;&gt;-->
+                <TextView
+                    android:text="Mix and Match"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="5"
+                    android:paddingBottom="10dp"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-        <!--&lt;!&ndash; Column 1 &ndash;&gt;-->
-        <!--<android.support.v7.widget.CardView-->
-            <!--app:cardBackgroundColor="#F7F7F7"-->
-            <!--android:id="@+id/civilworkCard"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_columnWeight="1"-->
-            <!--android:layout_rowWeight="1"-->
-            <!--android:layout_marginBottom="16dp"-->
-            <!--android:layout_marginLeft="16dp"-->
-            <!--android:layout_marginRight="16dp"-->
-            <!--app:cardElevation="8dp"-->
-            <!--app:cardCornerRadius="8dp"-->
-            <!--&gt;-->
+            </LinearLayout>
 
-            <!--<LinearLayout-->
-                <!--android:layout_gravity="center_horizontal|center_vertical"-->
-                <!--android:layout_margin="16dp"-->
-                <!--android:orientation="vertical"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:weightSum="5"-->
-                <!--android:layout_height="wrap_content">-->
+        </android.support.v7.widget.CardView>
 
-                <!--<ImageView-->
-                    <!--android:layout_weight="4.95"-->
-                    <!--android:src="@drawable/civil"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="0dp" />-->
+        <!-- Column 2 -->
+        <android.support.v7.widget.CardView
+            app:cardBackgroundColor="#F7F7F7"
+            android:id="@+id/developmentCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            >
 
-                <!--<TextView-->
-                    <!--android:text="Civil Work"-->
-                    <!--android:layout_weight="0.05"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"-->
-                    <!--android:fontFamily="@font/montserrat_regular"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
+            <LinearLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:weightSum="5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-            <!--</LinearLayout>-->
 
-        <!--</android.support.v7.widget.CardView>-->
+                <TextView
+                    android:layout_weight="5"
+                    android:paddingBottom="10dp"
+                    android:text="Development"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@android:color/black"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-        <!--&lt;!&ndash; Column 2 &ndash;&gt;-->
-        <!--<android.support.v7.widget.CardView-->
-            <!--app:cardBackgroundColor="#F7F7F7"-->
-            <!--android:id="@+id/mechanicalCard"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_columnWeight="1"-->
-            <!--android:layout_rowWeight="1"-->
-            <!--android:layout_marginBottom="16dp"-->
-            <!--android:layout_marginLeft="16dp"-->
-            <!--android:layout_marginRight="16dp"-->
-            <!--app:cardElevation="8dp"-->
-            <!--app:cardCornerRadius="8dp"-->
-            <!--&gt;-->
+            </LinearLayout>
 
-            <!--<LinearLayout-->
-                <!--android:layout_gravity="center_horizontal|center_vertical"-->
-                <!--android:layout_margin="16dp"-->
-                <!--android:orientation="vertical"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:weightSum="5">-->
+        </android.support.v7.widget.CardView>
 
-                <!--<ImageView-->
-                    <!--android:layout_weight="4.95"-->
-                    <!--android:src="@drawable/mechanical"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="0dp" />-->
 
-                <!--<TextView-->
-                    <!--android:layout_weight="0.05"-->
-                    <!--android:text="Mechanical Work"-->
-                    <!--android:textAlignment="center"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"-->
-                    <!--android:fontFamily="@font/montserrat_regular"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
+        <!-- Row 3 -->
 
-            <!--</LinearLayout>-->
+        <!-- Column 1 -->
+        <android.support.v7.widget.CardView
+            app:cardBackgroundColor="#F7F7F7"
+            android:id="@+id/civilworkCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            >
 
-        <!--</android.support.v7.widget.CardView>-->
-        <!--<android.support.v7.widget.CardView-->
-            <!--app:cardBackgroundColor="#F7F7F7"-->
-            <!--android:id="@+id/architectureCard"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_columnWeight="1"-->
-            <!--android:layout_rowWeight="1"-->
-            <!--android:layout_marginBottom="16dp"-->
-            <!--android:layout_marginLeft="16dp"-->
-            <!--android:layout_marginRight="16dp"-->
-            <!--app:cardElevation="8dp"-->
-            <!--app:cardCornerRadius="8dp"-->
-            <!--&gt;-->
+            <LinearLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:weightSum="5"
+                android:layout_height="wrap_content">
 
-            <!--<LinearLayout-->
-                <!--android:layout_gravity="center_horizontal|center_vertical"-->
-                <!--android:layout_margin="16dp"-->
-                <!--android:orientation="vertical"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:weightSum="5">-->
 
-                <!--<ImageView-->
-                    <!--android:layout_weight="4.95"-->
-                    <!--android:src="@drawable/architecture"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="0dp" />-->
+                <TextView
+                    android:text="Civil Work"
+                    android:layout_weight="0.05"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@android:color/black"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-                <!--<TextView-->
-                    <!--android:layout_weight="0.05"-->
-                    <!--android:text="Architecture Design"-->
-                    <!--android:textAlignment="center"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"-->
-                    <!--android:fontFamily="@font/montserrat_regular"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
+            </LinearLayout>
 
-            <!--</LinearLayout>-->
+        </android.support.v7.widget.CardView>
 
-        <!--</android.support.v7.widget.CardView>-->
-        <!--<android.support.v7.widget.CardView-->
-            <!--app:cardBackgroundColor="#F7F7F7"-->
-            <!--android:id="@+id/interiorCard"-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_columnWeight="1"-->
-            <!--android:layout_rowWeight="1"-->
-            <!--android:layout_marginBottom="16dp"-->
-            <!--android:layout_marginLeft="16dp"-->
-            <!--android:layout_marginRight="16dp"-->
-            <!--app:cardElevation="8dp"-->
-            <!--app:cardCornerRadius="8dp"-->
-            <!--&gt;-->
+        <!-- Column 2 -->
+        <android.support.v7.widget.CardView
+            app:cardBackgroundColor="#F7F7F7"
+            android:id="@+id/mechanicalCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            >
 
-            <!--<LinearLayout-->
-                <!--android:layout_gravity="center_horizontal|center_vertical"-->
-                <!--android:layout_margin="16dp"-->
-                <!--android:orientation="vertical"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:weightSum="5">-->
+            <LinearLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:weightSum="5">
 
-                <!--<ImageView-->
-                    <!--android:layout_weight="4.95"-->
-                    <!--android:src="@drawable/architecture"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="0dp" />-->
 
-                <!--<TextView-->
-                    <!--android:layout_weight="0.05"-->
-                    <!--android:text="Interior Design"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:textAlignment="center"-->
-                    <!--android:textColor="@android:color/black"-->
-                    <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"-->
-                    <!--android:fontFamily="@font/montserrat_regular"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content" />-->
+                <TextView
+                    android:layout_weight="5"
+                    android:text="Mechanical Work"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-            <!--</LinearLayout>-->
+            </LinearLayout>
 
-        <!--</android.support.v7.widget.CardView>-->
+        </android.support.v7.widget.CardView>
+
+        <!--  Row 4  -->
+        <android.support.v7.widget.CardView
+            app:cardBackgroundColor="#F7F7F7"
+            android:id="@+id/architectureCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            >
+
+            <LinearLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:weightSum="5">
+
+
+                <TextView
+                    android:layout_weight="0.05"
+                    android:text="Architecture Design"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            app:cardBackgroundColor="#F7F7F7"
+            android:id="@+id/interiorCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            >
+
+            <LinearLayout
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:weightSum="5">
+
+
+                <TextView
+                    android:layout_weight="0.05"
+                    android:text="Interior Design"
+                    android:layout_gravity="center_horizontal"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
 
     </GridLayout>
 </LinearLayout>
