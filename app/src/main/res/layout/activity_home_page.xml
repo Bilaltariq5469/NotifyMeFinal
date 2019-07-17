@@ -26,7 +26,7 @@
         <!-- Column 1 -->
         <android.support.v7.widget.CardView
             app:cardBackgroundColor="#F7F7F7"
-            android:id="@+id/mix_and_match"
+            android:id="@+id/set_alarm"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
@@ -106,7 +106,7 @@
         <!-- Column 1 -->
         <android.support.v7.widget.CardView
             app:cardBackgroundColor="#F7F7F7"
-            android:id="@+id/landscapingCard"
+            android:id="@+id/mix_and_match"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
@@ -145,7 +145,7 @@
         <!-- Column 2 -->
         <android.support.v7.widget.CardView
             app:cardBackgroundColor="#F7F7F7"
-            android:id="@+id/developmentCard"
+            android:id="@+id/send_message"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
@@ -169,7 +169,7 @@
                 <TextView
                     android:layout_weight="5"
                     android:paddingBottom="10dp"
-                    android:text="Development"
+                    android:text="Send Message"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@android:color/black"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -187,7 +187,7 @@
         <!-- Column 1 -->
         <android.support.v7.widget.CardView
             app:cardBackgroundColor="#F7F7F7"
-            android:id="@+id/civilworkCard"
+            android:id="@+id/Location_based_sms"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
@@ -209,7 +209,7 @@
 
 
                 <TextView
-                    android:text="Civil Work"
+                    android:text="Location based sms"
                     android:layout_weight="0.05"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@android:color/black"
@@ -225,7 +225,7 @@
         <!-- Column 2 -->
         <android.support.v7.widget.CardView
             app:cardBackgroundColor="#F7F7F7"
-            android:id="@+id/mechanicalCard"
+            android:id="@+id/Track_visited_markers"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
@@ -248,7 +248,7 @@
 
                 <TextView
                     android:layout_weight="5"
-                    android:text="Mechanical Work"
+                    android:text="Track visited Markers"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -286,7 +286,7 @@
 
                 <TextView
                     android:layout_weight="0.05"
-                    android:text="Architecture Design"
+                    android:text="View Road Status"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -321,15 +321,15 @@
 
 
                 <TextView
-                    android:layout_weight="0.05"
-                    android:text="Interior Design"
-                    android:layout_gravity="center_horizontal"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                    android:fontFamily="@font/montserrat_regular"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="0.05"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="How to use"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="@android:color/black" />
 
             </LinearLayout>
 

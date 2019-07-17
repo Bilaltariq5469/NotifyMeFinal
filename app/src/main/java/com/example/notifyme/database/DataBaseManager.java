@@ -134,6 +134,41 @@ public class DataBaseManager extends SQLiteOpenHelper {
 
     }
 
+    // TODO: this delete row in databse if the row has alarm'id equal alarmId
+    public Alarm getdata(int hour, int minute) {
+        // getting write data
+        SQLiteDatabase db = null;
+        String where = " where " + COL_HOUR + " = " + hour + " AND " + COL_MINUTE + " = " + minute;
+
+        try {
+            db = this.getWritableDatabase();
+            Cursor cursor= db.rawQuery("select * from " + TABLE_NAME + where, null);
+            try {
+                // method moveToFirst return true if cursor not empty
+                if (cursor.moveToFirst()) {
+                    do {
+                        Alarm alarm = new Alarm(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2), cursor.getString(3), cursor.getInt(4));
+                        return alarm;
+                    } while (cursor.moveToNext());
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "getAlarmList: exception cause " + e.getCause() + " message " + e.getMessage());
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (db != null) {
+                db.close();
+            }
+        }
+        return null;
+    }
+
 
     // TODO: get all Alarm from database and return arrayList alarm
     public ArrayList<Alarm> getAlarmList() {

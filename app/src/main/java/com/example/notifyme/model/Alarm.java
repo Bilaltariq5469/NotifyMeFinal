@@ -15,6 +15,10 @@ public class Alarm implements Serializable {
     private String alarm_Name;  // alarm's name
     private int onOff;          // alarm's on off
 
+    public Alarm()
+    {
+
+    }
     // first constructor is used at the import data from database
     public Alarm(int id, int hour_x, int minute_x, String alarm_Name, int onOff) {
         this.id = id;

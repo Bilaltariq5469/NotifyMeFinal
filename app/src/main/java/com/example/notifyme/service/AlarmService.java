@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.IBinder;
@@ -13,13 +14,20 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.example.notifyme.activity.AddAlarmActivity;
+import com.example.notifyme.database.DataBaseManager;
+import com.example.notifyme.model.Alarm;
 import com.example.notifyme.receiver.AlarmReceiver;
 import com.example.notifyme.ultil.Constants;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class AlarmService extends Service {
     MediaPlayer mediaPlayer; // this object to manage media
     private NotificationManager alarmNotificationManager;
+    DataBaseManager dataBaseManager;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -38,7 +46,23 @@ public class AlarmService extends Service {
                 // create mediaPlayer object
                 mediaPlayer = MediaPlayer.create(this, uri);
                 mediaPlayer.start();
-                sendNotification("Wake Up! Wake Up!");
+                Date currentTime = Calendar.getInstance().getTime();
+
+                dataBaseManager = new DataBaseManager(this);
+                // get Alarm ArrayList from database
+                Alarm alarm = dataBaseManager.getdata(currentTime.getHours(), currentTime.getMinutes());
+                sendNotification(alarm.getAlarm_Name());
+//                SharedPreferences sharedPreferences = getSharedPreferences("AlarmMessage",MODE_PRIVATE);
+//                int count = sharedPreferences.getInt("alarm_no",0);
+//                for(int i=0; i<=count && i!=0; i++)
+//                {
+//                    String savedtime = sharedPreferences.getString("time_"+i,"");
+//                    String []split = savedtime.split(":");
+//                    if(Integer.parseInt(split[0]) == currentTime.getHours() && Integer.parseInt(split[1]) == currentTime.getMinutes())
+//                    {
+//                        sendNotification(sharedPreferences.getString("message_"+i,""));
+//                    }
+//                }
                 break;
             case Constants.OFF_INTENT:
                 // this check if user pressed cancel

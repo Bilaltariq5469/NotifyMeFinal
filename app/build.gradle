@@ -35,6 +35,7 @@ dependencies {
     // visit this website http://jakewharton.github.io/butterknife/
     implementation 'com.jakewharton:butterknife:9.0.0-rc1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    implementation 'us.belka:androidtoggleswitch:1.2.2'
 
 }
 apply plugin: 'com.google.gms.google-services'

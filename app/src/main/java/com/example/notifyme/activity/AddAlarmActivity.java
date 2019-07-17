@@ -1,6 +1,7 @@
 package com.example.notifyme.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -122,6 +123,14 @@ public class AddAlarmActivity extends AppCompatActivity {
         Alarm alarm = initAlarm();
 
         if (addScreen) {
+//            SharedPreferences sharedPreferences = getSharedPreferences("AlarmMessage",MODE_PRIVATE);
+//            SharedPreferences.Editor editor = sharedPreferences.edit();
+//            int var = sharedPreferences.getInt("alarm_no",0);
+//            var++;
+//            editor.putInt("alarm_no",var);
+//            editor.putString("message_"+var,alarm.getAlarm_Name());
+//            editor.putString("time_"+var,String.valueOf(alarm.getHour_x())+":"+String.valueOf(alarm.getMinute_x()));
+//            editor.commit();
             // at the adding time each alarm object is assigned for one id to manage
             // this id is unique, using system current time in millisecond.
             //  This id would be use for pendingIntent to manage multiple PendingIntent,
