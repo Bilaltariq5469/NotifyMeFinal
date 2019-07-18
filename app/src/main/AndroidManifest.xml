@@ -36,20 +36,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <service
-            android:name=".Services.Service_Connection"
-            android:enabled="true"
-            android:exported="false" />
 
-        <receiver
-            android:name=".receiver.AlarmReceiver"
-            android:enabled="true"
-            android:exported="true" />
-
-        <service
-            android:name=".service.AlarmService"
-            android:enabled="true"
-            android:exported="true" />
 
         <activity
             android:name=".activity.LocationBasedService"
@@ -71,8 +58,14 @@
             android:enabled="true"
             android:exported="true" />
 
+
         <service
             android:name=".service.AlarmService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name=".service.Service_Connection"
             android:enabled="true"
             android:exported="true" />
     </application>

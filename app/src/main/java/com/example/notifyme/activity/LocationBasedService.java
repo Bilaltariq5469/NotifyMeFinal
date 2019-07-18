@@ -2,10 +2,13 @@ package com.example.notifyme.activity;
 
 import android.Manifest;
 import android.app.ActivityManager;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.media.RingtoneManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
@@ -22,13 +25,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.notifyme.R;
-import com.example.notifyme.Services.Service_Connection;
+import com.example.notifyme.service.Service_Connection;
+import com.example.notifyme.model.Alarm;
+import com.example.notifyme.receiver.AlarmReceiver;
+import com.example.notifyme.ultil.Constants;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Calendar;
 
 public class LocationBasedService extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, View.OnClickListener {
 
@@ -127,12 +135,8 @@ public class LocationBasedService extends FragmentActivity implements OnMapReady
                     editor.putString("cordinates", et_cordinates.getText().toString());
                     editor.putString("radius", et_radius.getText().toString());
                     editor.commit();
-                    if(!ismyservicerunning(Service_Connection.class))
-                    {
-                        Intent intent=new Intent(LocationBasedService.this,Service_Connection.class);
-                        startService(intent);
-                        Toast.makeText(this, "Service Started", Toast.LENGTH_SHORT).show();
-                    }
+                    Intent intent=new Intent(LocationBasedService.this,Service_Connection.class);
+                    startService(intent);
                     // Save it in Shared Preferences and Start Service if it was in radius then silent phone
 //                  // final AudioManager mode = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
 //                  // mode.setRingerMode(AudioManager.RINGER_MODE_SILENT);
@@ -153,22 +157,6 @@ public class LocationBasedService extends FragmentActivity implements OnMapReady
         }
     }
 
-    public boolean ismyservicerunning(Class<?> service)
-    {
-        ActivityManager manager= (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-        for(ActivityManager.RunningServiceInfo serviceInfo:manager.getRunningServices(Integer.MAX_VALUE))
-        {
-            if(service.getName().equals(serviceInfo.service.getClassName()))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        return false;
-    }
 
     public void expandorcollapseBottomSheet() {
         if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
