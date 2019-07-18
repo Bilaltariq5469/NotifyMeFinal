@@ -26,8 +26,8 @@ public class SendMessage extends AppCompatActivity {
     EditText MessageText = null;
     EditText Number = null;
     ListView listView = null;
-    ArrayList<String> Numbers = null;
     ArrayAdapter<String> arrayAdapter = null;
+    ArrayList<String> Numbers = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -26,17 +26,12 @@ import android.widget.Toast;
 
 import com.example.notifyme.R;
 import com.example.notifyme.service.Service_Connection;
-import com.example.notifyme.model.Alarm;
-import com.example.notifyme.receiver.AlarmReceiver;
-import com.example.notifyme.ultil.Constants;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.util.Calendar;
 
 public class LocationBasedService extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, View.OnClickListener {
 

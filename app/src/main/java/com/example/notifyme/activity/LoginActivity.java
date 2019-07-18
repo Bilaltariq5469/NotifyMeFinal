@@ -36,8 +36,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView tv_create_account;
     Button bt_login;
     FirebaseAuth auth;
-    DatabaseReference databaseReference;
     SweetAlertDialog sweetAlertDialog;
+    DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
