@@ -82,9 +82,9 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         }
         else if(location_based_sms.getId() == view.getId())
         {
-            Toast.makeText(this, "Location based Sms", Toast.LENGTH_SHORT).show();
-            Intent locationbasedsendMessage = new Intent(HomePageActivity.this, LocationBasedSms.class);
-            startActivity(locationbasedsendMessage);
+//            Toast.makeText(this, "Location based Sms", Toast.LENGTH_SHORT).show();
+//            Intent locationbasedsendMessage = new Intent(HomePageActivity.this, LocationBasedSms.class);
+//            startActivity(locationbasedsendMessage);
         }
     }
 }

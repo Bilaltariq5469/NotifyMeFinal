@@ -6,12 +6,15 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.IBinder;
+import android.os.Vibrator;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.notifyme.activity.AddAlarmActivity;
 import com.example.notifyme.database.DataBaseManager;
@@ -45,7 +48,19 @@ public class AlarmService extends Service {
 
                 // create mediaPlayer object
                 mediaPlayer = MediaPlayer.create(this, uri);
-                mediaPlayer.start();
+
+                SharedPreferences sharedPreferences = getSharedPreferences("myprefs", MODE_PRIVATE);
+                boolean vibrate = sharedPreferences.getBoolean("vibrate",false);
+                boolean ringtone = sharedPreferences.getBoolean("ringtone",false);
+                boolean silent = sharedPreferences.getBoolean("silent",false);
+
+                if(ringtone)
+                    mediaPlayer.start();
+                if(vibrate)
+                    Vibrate(10000);
+                if(silent)
+                    Silent();
+
                 Date currentTime = Calendar.getInstance().getTime();
 
                 dataBaseManager = new DataBaseManager(this);
@@ -113,5 +128,21 @@ public class AlarmService extends Service {
     }
     public IBinder onBind(Intent intent) {
         return null;
+    }
+    public void Vibrate(int duration)
+    {
+        Vibrator vibs = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        vibs.vibrate(duration);
+    }
+    public void Silent()
+    {
+        try {
+            final AudioManager mode = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
+            mode.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+        }catch (Exception ex)
+        {
+            Log.d("OKOK",ex.getMessage());
+        }
+
     }
 }

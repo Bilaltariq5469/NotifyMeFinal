@@ -36,6 +36,9 @@ public class SendMessage extends AppCompatActivity {
 
         editor = getSharedPreferences("myprefs", MODE_PRIVATE).edit();
         sharedPreferences = getSharedPreferences("myprefs", MODE_PRIVATE);
+
+
+
         MessageText = findViewById(R.id.msgText);
         Number = findViewById(R.id.newNumber);
         listView = findViewById(R.id.numbers);
