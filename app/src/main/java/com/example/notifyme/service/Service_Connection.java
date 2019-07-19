@@ -49,6 +49,7 @@ public class Service_Connection extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         //onTaskRemoved(intent);
+        super.onStartCommand(intent, flags, startId);
         return START_STICKY;
     }
 

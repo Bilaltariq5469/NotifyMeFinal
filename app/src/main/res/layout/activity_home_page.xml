@@ -187,7 +187,7 @@
         <!-- Column 1 -->
         <android.support.v7.widget.CardView
             app:cardBackgroundColor="#F7F7F7"
-            android:id="@+id/Location_based_sms"
+            android:id="@+id/location_based_sms"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
