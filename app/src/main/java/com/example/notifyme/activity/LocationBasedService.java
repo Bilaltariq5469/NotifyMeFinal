@@ -132,6 +132,10 @@ public class LocationBasedService extends FragmentActivity implements OnMapReady
                     editor.commit();
                     Intent intent=new Intent(LocationBasedService.this,Service_Connection.class);
                     startService(intent);
+                    et_radius.setText("");
+                    et_cordinates.setText("");
+                    expandorcollapseBottomSheet();
+                    Toast.makeText(this, "Saved Successfully", Toast.LENGTH_SHORT).show();
                     // Save it in Shared Preferences and Start Service if it was in radius then silent phone
 //                  // final AudioManager mode = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
 //                  // mode.setRingerMode(AudioManager.RINGER_MODE_SILENT);

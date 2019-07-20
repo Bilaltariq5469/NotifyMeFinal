@@ -90,7 +90,6 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/email_text"
                 android:inputType="textEmailAddress"
-                android:text="f158135@nu.edu.pk"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white" />
         </android.support.design.widget.TextInputLayout>
@@ -110,7 +109,6 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/password_text"
                 android:inputType="textPassword"
-                android:text="12345678"
                 android:textColor="@android:color/white"
                 android:textColorHint="@android:color/white"
                 tools:targetApi="m" />

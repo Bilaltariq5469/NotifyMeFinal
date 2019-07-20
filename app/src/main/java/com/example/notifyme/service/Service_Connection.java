@@ -126,7 +126,7 @@ public class Service_Connection extends Service {
 
     public void checkradius(Location currentlocation)
     {
-        Toast.makeText(context, "Checking Cordinates", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "Checking Cordinates", Toast.LENGTH_SHORT).show();
         SharedPreferences sharedPreferences = getSharedPreferences("LocationBased",MODE_PRIVATE);
         Location savedlocation = new Location("");
         savedlocation.setLongitude(Double.parseDouble(sharedPreferences.getString("cordinates","").split("/")[1]));
@@ -139,6 +139,7 @@ public class Service_Connection extends Service {
             // create mediaPlayer object
             mediaPlayer = MediaPlayer.create(this, uri);
             mediaPlayer.start();
+            stopSelf();
 //            Toast.makeText(context, "alarm generated successfully", Toast.LENGTH_SHORT).show();
             //generate alarm
         }

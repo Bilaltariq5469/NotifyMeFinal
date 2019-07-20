@@ -33,8 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name"
-            android:inputType="text"
-            android:text="Bilal" />
+            android:inputType="text" />
     </android.support.design.widget.TextInputLayout>
 
 
@@ -50,8 +49,7 @@
             android:layout_height="wrap_content"
             android:hint="Email Address"
             android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:text="f158135@nu.edu.pk" />
+            android:maxLines="1" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -68,8 +66,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password 8 Characters"
-            android:inputType="textPassword"
-            android:text="12345678" />
+            android:inputType="textPassword" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -86,8 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Confirm password"
-            android:inputType="textPassword"
-            android:text="12345678" />
+            android:inputType="textPassword" />
 
     </android.support.design.widget.TextInputLayout>
 

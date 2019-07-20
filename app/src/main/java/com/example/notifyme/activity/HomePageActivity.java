@@ -13,10 +13,20 @@ import android.widget.Toast;
 import android.view.WindowManager;
 
 import com.example.notifyme.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomePageActivity extends AppCompatActivity implements View.OnClickListener {
 
-    CardView mix_and_match, location_based_alarm, set_alarm, send_message, location_based_sms;
+    CardView mix_and_match,
+            location_based_alarm,
+            set_alarm,
+            send_message,
+            location_based_sms,
+            track_points,
+            road_condition,
+            views_points,
+            how_to_use,
+            logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +52,11 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         set_alarm = (CardView)findViewById(R.id.set_alarm);
         send_message = (CardView)findViewById(R.id.send_message);
         location_based_sms = (CardView)findViewById(R.id.location_based_sms);
+        track_points = (CardView) findViewById(R.id.Track_visited_markers);
+        road_condition = (CardView)findViewById(R.id.road_condition);
+        views_points = (CardView)findViewById(R.id.view_points);
+        how_to_use = (CardView)findViewById(R.id.how_to_use);
+        logout = (CardView)findViewById(R.id.logout);
     }
 
     public void setClickListeners()
@@ -51,6 +66,11 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         set_alarm.setOnClickListener(this);
         send_message.setOnClickListener(this);
         location_based_sms.setOnClickListener(this);
+        track_points.setOnClickListener(this);
+        road_condition.setOnClickListener(this);
+        views_points.setOnClickListener(this);
+        how_to_use.setOnClickListener(this);
+        logout.setOnClickListener(this);
     }
 
 
@@ -82,9 +102,41 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         }
         else if(location_based_sms.getId() == view.getId())
         {
-//            Toast.makeText(this, "Location based Sms", Toast.LENGTH_SHORT).show();
-//            Intent locationbasedsendMessage = new Intent(HomePageActivity.this, LocationBasedSms.class);
-//            startActivity(locationbasedsendMessage);
+            Toast.makeText(this, "Location based Sms", Toast.LENGTH_SHORT).show();
+            Intent locationbasedsendMessage = new Intent(HomePageActivity.this, LocationBasedSms.class);
+            startActivity(locationbasedsendMessage);
+        }
+        else if(view.getId() == track_points.getId())
+        {
+            Toast.makeText(this, "Track Points", Toast.LENGTH_SHORT).show();
+            Intent trackpointsIntent = new Intent(HomePageActivity.this, TrackPointsMaps.class);
+            startActivity(trackpointsIntent);
+        }
+        else if(view.getId() == road_condition.getId())
+        {
+            Toast.makeText(this, "Road Condition", Toast.LENGTH_SHORT).show();
+            Intent roadConditionIntent = new Intent(HomePageActivity.this, RoadConditionMaps.class);
+            startActivity(roadConditionIntent);
+        }
+        else if(view.getId() == views_points.getId())
+        {
+            Toast.makeText(this, "View Points", Toast.LENGTH_SHORT).show();
+            Intent viewpointsintent = new Intent(HomePageActivity.this, ViewPointsMaps.class);
+            startActivity(viewpointsintent);
+        }
+        else if(how_to_use.getId() == view.getId())
+        {
+            Toast.makeText(this, "How to Use", Toast.LENGTH_SHORT).show();
+            Intent howtouseintent = new Intent(HomePageActivity.this, HowToUse.class);
+            startActivity(howtouseintent);
+        }
+        else if(logout.getId() == view.getId())
+        {
+            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
+            Intent loginintent = new Intent(HomePageActivity.this, LoginActivity.class);
+            startActivity(loginintent);
+            FirebaseAuth.getInstance().signOut();
+            finish();
         }
     }
 }

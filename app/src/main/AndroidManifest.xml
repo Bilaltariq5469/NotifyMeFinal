@@ -2,21 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.notifyme">
-
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -24,8 +27,8 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- You need the permission to set the alarm -->
     <uses-permission android:name="your.package.alarm.permission.SET_ALARM" />
-    <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
-    <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:allowBackup="true"
@@ -35,7 +38,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-
+        <activity android:name=".activity.MapsActivity"></activity>
+        <activity android:name=".activity.HowToUse" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -49,13 +53,18 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activity.LocationBasedSms"
-            android:label="@string/title_activity_location_based_sms"></activity>
-
-
+            android:name=".activity.ViewPointsMaps"
+            android:label="@string/title_activity_view_points_maps" />
         <activity
-            android:name=".activity.LocationBasedSmsNext"/>
-
+            android:name=".activity.TrackPointsMaps"
+            android:label="@string/title_activity_track_points_maps" />
+        <activity
+            android:name=".activity.RoadConditionMaps"
+            android:label="@string/title_activity_road_condition_maps" />
+        <activity
+            android:name=".activity.LocationBasedSms"
+            android:label="@string/title_activity_location_based_sms" />
+        <activity android:name=".activity.LocationBasedSmsNext" />
         <activity android:name=".activity.MixandMatchActivity" />
         <activity android:name=".activity.SendMessage" />
         <activity
@@ -90,6 +99,18 @@
             android:name=".service.LocationBasedSmsService"
             android:enabled="true"
             android:exported="true" />
+        <service
+            android:name=".service.TrackPointsService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.RoadConditionService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>

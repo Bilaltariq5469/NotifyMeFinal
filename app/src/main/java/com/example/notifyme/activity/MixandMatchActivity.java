@@ -26,12 +26,11 @@ public class MixandMatchActivity extends AppCompatActivity {
         editor = getSharedPreferences("myprefs", MODE_PRIVATE).edit();
         sharedPreferences = getSharedPreferences("myprefs", MODE_PRIVATE);
 
-        intilizeValues();
+//        intilizeValues();
 
         ringtoneToggleSwitch = (ToggleSwitch) findViewById(R.id.ringtone_switch);
         vibrateToggleSwitch = (ToggleSwitch) findViewById(R.id.vibration_switch);
         silentToggleSwitch = (ToggleSwitch) findViewById(R.id.silent_switch);
-        setToggels();
 
         ringtoneToggleSwitch.setOnToggleSwitchChangeListener(new ToggleSwitch.OnToggleSwitchChangeListener(){
 
@@ -60,19 +59,28 @@ public class MixandMatchActivity extends AppCompatActivity {
 
     }
 
-    private void setToggels() {
-        if(ringtone)
+    private void setToggels(Boolean prev_ringtone, Boolean prev_vibrate, Boolean prev_silent) {
+        if(prev_ringtone)
             ringtoneToggleSwitch.setCheckedTogglePosition(1);
         else
             ringtoneToggleSwitch.setCheckedTogglePosition(0);
-        if(vibrate)
+        if(prev_vibrate)
             vibrateToggleSwitch.setCheckedTogglePosition(1);
         else
             vibrateToggleSwitch.setCheckedTogglePosition(0);
-        if(silent)
+        if(prev_silent)
             silentToggleSwitch.setCheckedTogglePosition(1);
         else
             silentToggleSwitch.setCheckedTogglePosition(0);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Boolean prev_vibrate = sharedPreferences.getBoolean("vibrate",false);
+        Boolean prev_ringtone = sharedPreferences.getBoolean("ringtone",false);
+        Boolean prev_silent = sharedPreferences.getBoolean("silent",false);
+        setToggels(prev_ringtone,prev_vibrate,prev_silent);
     }
 
     private void intilizeValues() {

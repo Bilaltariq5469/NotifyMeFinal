@@ -1,11 +1,15 @@
 package com.example.notifyme.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -43,6 +47,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         changeStatusBarColor();
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(LoginActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+            return;
+        }
         initializeViews();
         setClickListeners();
     }
@@ -95,6 +103,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()) {
                                     sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                                    sweetAlertDialog.getButton(R.id.confirm_button).setVisibility(View.GONE);
                                     Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                     String email = et_email.getText().toString();
                                     email = email.replace(".", "(period)");
@@ -162,12 +171,49 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser user = auth.getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null)
         {
             Intent homePageIntent = new Intent(LoginActivity.this, HomePageActivity.class);
             startActivity(homePageIntent);
             finish();
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                boolean showRationale = shouldShowRequestPermissionRationale(permissions[0]);
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(LoginActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                    if (ActivityCompat.checkSelfPermission(LoginActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                } else if ((grantResults[0] != PackageManager.PERMISSION_GRANTED || grantResults[1] != PackageManager.PERMISSION_GRANTED) && showRationale) {
+                    finish();
+                } else {
+//                    boolean showRationale = shouldShowRequestPermissionRationale(permissions[0]);
+                    if (!showRationale) {
+                        SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
+                        sweetAlertDialog.setTitle("Need Location Permission");
+                        sweetAlertDialog.setContentText("1) Go to Mobile Settings\n2) Go to Installed Apps\n 3) " +
+                                "Choose NotifyMe\n 4) Give Location Access");
+                        sweetAlertDialog.setConfirmButton("Ok", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                                sweetAlertDialog.dismissWithAnimation();
+                                finish();
+
+                            }
+                        });
+                        sweetAlertDialog.show();
+                    }
+                }
+                break;
+            }
         }
     }
 }
