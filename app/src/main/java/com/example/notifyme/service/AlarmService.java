@@ -1,5 +1,6 @@
 package com.example.notifyme.service;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -9,6 +10,7 @@ import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.Vibrator;
 import android.provider.Settings;
@@ -113,6 +115,12 @@ public class AlarmService extends Service {
         alarmNotificationManager = (NotificationManager) this
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("my_channel_03",
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            alarmNotificationManager.createNotificationChannel(channel);
+        }
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, AddAlarmActivity.class), 0);
 

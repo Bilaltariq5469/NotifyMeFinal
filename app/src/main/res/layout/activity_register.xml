@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:id="@+id/snackbar"
-    tools:context=".SignupActivity.RegisterActivity">
+    tools:context=".activity.RegisterActivity">
 
 
     <TextView

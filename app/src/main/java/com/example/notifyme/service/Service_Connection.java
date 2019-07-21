@@ -128,20 +128,24 @@ public class Service_Connection extends Service {
     {
         //Toast.makeText(context, "Checking Cordinates", Toast.LENGTH_SHORT).show();
         SharedPreferences sharedPreferences = getSharedPreferences("LocationBased",MODE_PRIVATE);
-        Location savedlocation = new Location("");
-        savedlocation.setLongitude(Double.parseDouble(sharedPreferences.getString("cordinates","").split("/")[1]));
-        savedlocation.setLatitude(Double.parseDouble(sharedPreferences.getString("cordinates","").split("/")[0]));
-        int radius = Integer.parseInt(sharedPreferences.getString("radius",""));
-        if((currentlocation.distanceTo(savedlocation)/1000) <=  radius)
-        {
-            Uri uri = Settings.System.DEFAULT_ALARM_ALERT_URI;
+        String cordinates = sharedPreferences.getString("cordinates","");
+        if(!cordinates.equals("")) {
+            Location savedlocation = new Location("");
+            savedlocation.setLongitude(Double.parseDouble(cordinates.split("/")[1]));
+            savedlocation.setLatitude(Double.parseDouble(cordinates.split("/")[0]));
+            int radius = Integer.parseInt(sharedPreferences.getString("radius", ""));
+            if ((currentlocation.distanceTo(savedlocation) / 1000) <= radius) {
+                Uri uri = Settings.System.DEFAULT_ALARM_ALERT_URI;
 
-            // create mediaPlayer object
-            mediaPlayer = MediaPlayer.create(this, uri);
-            mediaPlayer.start();
-            stopSelf();
+                // create mediaPlayer object
+                mediaPlayer = MediaPlayer.create(this, uri);
+                mediaPlayer.start();
+                //stopSelf();
+                //context.stopService(new Intent(context, Service_Connection.class));
+                sharedPreferences.edit().clear().commit();
 //            Toast.makeText(context, "alarm generated successfully", Toast.LENGTH_SHORT).show();
-            //generate alarm
+                //generate alarm
+            }
         }
     }
     @Override
