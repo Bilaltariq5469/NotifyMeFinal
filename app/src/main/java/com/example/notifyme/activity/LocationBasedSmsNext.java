@@ -53,26 +53,35 @@ public class LocationBasedSmsNext extends AppCompatActivity implements View.OnCl
     }
 
     public void sendMessage(View view) {
-        if (et_radius.getText().length() > 0 && Numbers.size() > 0) {
-            SharedPreferences sharedPreferences = getSharedPreferences("LocationBasedSms", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("radius", et_radius.getText().toString());
-            editor.putInt("count", Numbers.size());
-            editor.putString("message", MessageText.getText().toString());
-            int i = 0;
-            for(String s : Numbers)
-            {
-                editor.putString("no_"+i, s);
-                i++;
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+            if (et_radius.getText().length() > 0 && Numbers.size() > 0) {
+                SharedPreferences sharedPreferences = getSharedPreferences("LocationBasedSms", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("radius", et_radius.getText().toString());
+                editor.putInt("count", Numbers.size());
+                editor.putString("message", MessageText.getText().toString());
+                int i = 0;
+                for (String s : Numbers) {
+                    editor.putString("no_" + i, s);
+                    i++;
+                }
+                editor.commit();
+                Intent intent = new Intent(LocationBasedSmsNext.this, LocationBasedSmsService.class);
+                startService(intent);
+            } else {
+                if (et_radius.getText().length() == 0)
+                    Toast.makeText(this, "Enter radius", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(this, "Enter Numbers First", Toast.LENGTH_SHORT).show();
             }
-            editor.commit();
-            Intent intent=new Intent(LocationBasedSmsNext.this, LocationBasedSmsService.class);
-            startService(intent);
-        } else {
-            if (et_radius.getText().length() == 0)
-                Toast.makeText(this, "Enter radius", Toast.LENGTH_SHORT).show();
-            else
-                Toast.makeText(this, "Enter Numbers First", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            {
+                requestPermissions(new String[]{Manifest.permission.SEND_SMS}, 10);
+            }
         }
     }
 

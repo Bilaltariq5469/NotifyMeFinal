@@ -336,7 +336,7 @@ public class DirectionsActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     public void onLocationChanged(Location location) {
         if (location != null) {
-            Toast.makeText(this, "Updating Location", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Updating Location", Toast.LENGTH_SHORT).show();
             originLocation = location;
             originPosition = Point.fromLngLat(originLocation.getLongitude(), originLocation.getLatitude());
             LatLng point1 = new LatLng(location.getLatitude(), location.getLongitude());
@@ -352,6 +352,10 @@ public class DirectionsActivity extends AppCompatActivity implements OnMapReadyC
 
             map.moveCamera(CameraUpdateFactory
                     .newCameraPosition(position));
+        }
+        else
+        {
+            originPosition = Point.fromLngLat( 74.339521,31.557448);
         }
     }
 
@@ -406,7 +410,7 @@ public class DirectionsActivity extends AppCompatActivity implements OnMapReadyC
         destinationMarker = map.addMarker(new MarkerOptions()
                 .position(point1));
         destinationPosition = Point.fromLngLat(point1.getLongitude(),point1.getLatitude());
-        originPosition = Point.fromLngLat(originLocation.getLongitude(),originLocation.getLatitude());
+        //originPosition = Point.fromLngLat(originLocation.getLongitude(),originLocation.getLatitude());
         getRoute(originPosition,destinationPosition);
         NavigationLauncherOptions options = NavigationLauncherOptions.builder().origin(originPosition).destination(destinationPosition).build();
         NavigationLauncher.startNavigation(this,options);
