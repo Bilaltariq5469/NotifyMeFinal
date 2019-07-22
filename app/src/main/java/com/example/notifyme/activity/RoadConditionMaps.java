@@ -1,20 +1,15 @@
 package com.example.notifyme.activity;
 
 import android.Manifest;
-import android.app.ActivityManager;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.media.RingtoneManager;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.Window;
@@ -25,7 +20,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.notifyme.R;
-import com.example.notifyme.service.Service_Connection;
+import com.example.notifyme.database.DataBaseManager;
+import com.example.notifyme.database.RoadConditionDb;
+import com.example.notifyme.model.Alarm;
+import com.example.notifyme.model.RoadCondition;
+import com.example.notifyme.service.RoadConditionService;
+import com.example.notifyme.service.TrackPointsService;
+import com.example.notifyme.view.AlarmAdapter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -33,22 +34,27 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class LocationBasedService extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, View.OnClickListener {
+import java.util.ArrayList;
+
+public class RoadConditionMaps extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, View.OnClickListener {
 
     private GoogleMap mMap;
-    EditText et_cordinates, et_radius;
-    Button btn_set_marker;
-    private FloatingActionButton fab;
-    private BottomSheetBehavior bottomSheetBehavior;
+    RoadConditionDb roadConditionDb;
+    EditText et_cordinates, et_message;
+    Button btn_saveMarker;
+    FloatingActionButton fab;
+    BottomSheetBehavior bottomSheetBehavior;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location_based_service);
+        setContentView(R.layout.activity_road_condition_maps);
         changeStatusBarColor();
         initializeViews();
         setClickListeners();
     }
+
+
 
     public void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -59,25 +65,43 @@ public class LocationBasedService extends FragmentActivity implements OnMapReady
     }
 
     public void initializeViews() {
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        et_cordinates = (EditText) findViewById(R.id.cordinates);
-        et_radius = (EditText) findViewById(R.id.radius);
-        btn_set_marker = findViewById(R.id.set_marker);
+        et_cordinates = findViewById(R.id.cordinates);
+        et_message = findViewById(R.id.message);
+        btn_saveMarker = findViewById(R.id.save_marker);
+        fab = findViewById(R.id.fab);
 
         // Initializing Objects
-        fab = findViewById(R.id.fab);
+        roadConditionDb = new RoadConditionDb(this);
         final View bottomSheet = findViewById(R.id.bottom_sheet);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
     }
 
     public void setClickListeners() {
-        btn_set_marker.setOnClickListener(this);
+        btn_saveMarker.setOnClickListener(this);
         fab.setOnClickListener(this);
     }
 
+    private void importData() {
+        // if alarmAdapter null it's means data have not imported, yet or database is empty
+        // initialize database manager
+        // get RoadCondition ArrayList from database
+        ArrayList<RoadCondition> roadCondition = roadConditionDb.getRoadList();
+        for (int i = 0; i < roadCondition.size(); i++) {
+            drawMarker(roadCondition.get(i).getMessage(), roadCondition.get(i).getCordinates());
+        }
+    }
+
+    void drawMarker(String message, String cordinates) {
+        LatLng latLng = new LatLng(Double.parseDouble(cordinates.split("/")[0]), Double.parseDouble(cordinates.split("/")[1]));
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title(message);
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.addMarker(markerOptions);
+    }
 
     /**
      * Manipulates the map once available.
@@ -104,17 +128,15 @@ public class LocationBasedService extends FragmentActivity implements OnMapReady
         mMap.setTrafficEnabled(true);
         mMap.setOnMapClickListener(this);
         mMap.setMyLocationEnabled(true);
-        // Moving to Faisalabad
-//        LatLng currentlocation = new LatLng(31.4504,73.1350);//provider name is unnecessary
-//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentlocation, 16));
+        importData();
     }
 
     @Override
     public void onMapClick(LatLng latLng) {
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        markerOptions.title(latLng.latitude + " : " + latLng.longitude);
-        mMap.clear();
+        markerOptions.title("Point");
+        //mMap.clear();
         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.addMarker(markerOptions);
         et_cordinates.setText(String.valueOf(latLng.latitude) + "/" + String.valueOf(latLng.longitude));
@@ -122,33 +144,23 @@ public class LocationBasedService extends FragmentActivity implements OnMapReady
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == btn_set_marker.getId())
-        {
-            if(et_cordinates.getText().toString().length() > 0) {
-                if (et_radius.getText().toString().length() > 0) {
-                    SharedPreferences sharedPreferences = getSharedPreferences("LocationBased",MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("cordinates", et_cordinates.getText().toString());
-                    editor.putString("radius", et_radius.getText().toString());
-                    editor.commit();
-                    Intent intent=new Intent(LocationBasedService.this,Service_Connection.class);
-                    startService(intent);
-                    et_radius.setText("");
+        if (view.getId() == R.id.save_marker) {
+            if (et_cordinates.getText().length() > 0) {
+                if (et_message.getText().length() > 0) {
+                    RoadCondition roadCondition = new RoadCondition(et_message.getText().toString(), et_cordinates.getText().toString());
+                    roadConditionDb.insert(roadCondition);
+                    Toast.makeText(this, "Marker Added Successfully", Toast.LENGTH_SHORT).show();
                     et_cordinates.setText("");
+                    et_message.setText("");
                     expandorcollapseBottomSheet();
-                    Toast.makeText(this, "Saved Successfully", Toast.LENGTH_SHORT).show();
-                    // Save it in Shared Preferences and Start Service if it was in radius then silent phone
-//                  // final AudioManager mode = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
-//                  // mode.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                    Intent intent=new Intent(RoadConditionMaps.this, RoadConditionService.class);
+                    startService(intent);
+
+                } else {
+                    Toast.makeText(this, "Enter Message", Toast.LENGTH_SHORT).show();
                 }
-                else
-                {
-                    Toast.makeText(this, "Enter Radius", Toast.LENGTH_SHORT).show();
-                }
-            }
-            else
-            {
-                Toast.makeText(this, "Select Location First", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Tap on Map to get Cordinates", Toast.LENGTH_SHORT).show();
             }
         }
         else if(view.getId() == fab.getId())
@@ -156,8 +168,6 @@ public class LocationBasedService extends FragmentActivity implements OnMapReady
             expandorcollapseBottomSheet();
         }
     }
-
-
     public void expandorcollapseBottomSheet() {
         if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
             rotateFabBackward();

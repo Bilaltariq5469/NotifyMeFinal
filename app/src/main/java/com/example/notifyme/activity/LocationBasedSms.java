@@ -1,20 +1,13 @@
 package com.example.notifyme.activity;
 
-import android.Manifest;
-import android.app.ActivityManager;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.media.RingtoneManager;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.Window;
@@ -33,18 +26,17 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class LocationBasedService extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener, View.OnClickListener {
+public class LocationBasedSms extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMapClickListener {
 
     private GoogleMap mMap;
-    EditText et_cordinates, et_radius;
-    Button btn_set_marker;
-    private FloatingActionButton fab;
+    Button btn_next;
+    FloatingActionButton fab;
+    EditText et_cordinates;
     private BottomSheetBehavior bottomSheetBehavior;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location_based_service);
+        setContentView(R.layout.activity_location_based_sms);
         changeStatusBarColor();
         initializeViews();
         setClickListeners();
@@ -58,14 +50,16 @@ public class LocationBasedService extends FragmentActivity implements OnMapReady
         }
     }
 
-    public void initializeViews() {
+    public void initializeViews()
+    {
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        btn_next = (Button) findViewById(R.id.next);
         et_cordinates = (EditText) findViewById(R.id.cordinates);
-        et_radius = (EditText) findViewById(R.id.radius);
-        btn_set_marker = findViewById(R.id.set_marker);
+
 
         // Initializing Objects
         fab = findViewById(R.id.fab);
@@ -73,8 +67,9 @@ public class LocationBasedService extends FragmentActivity implements OnMapReady
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
     }
 
-    public void setClickListeners() {
-        btn_set_marker.setOnClickListener(this);
+    public void setClickListeners()
+    {
+        btn_next.setOnClickListener(this);
         fab.setOnClickListener(this);
     }
 
@@ -90,61 +85,27 @@ public class LocationBasedService extends FragmentActivity implements OnMapReady
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
         mMap = googleMap;
         mMap.setTrafficEnabled(true);
         mMap.setOnMapClickListener(this);
         mMap.setMyLocationEnabled(true);
-        // Moving to Faisalabad
-//        LatLng currentlocation = new LatLng(31.4504,73.1350);//provider name is unnecessary
-//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentlocation, 16));
-    }
-
-    @Override
-    public void onMapClick(LatLng latLng) {
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title(latLng.latitude + " : " + latLng.longitude);
-        mMap.clear();
-        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.addMarker(markerOptions);
-        et_cordinates.setText(String.valueOf(latLng.latitude) + "/" + String.valueOf(latLng.longitude));
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == btn_set_marker.getId())
+        if(view.getId() == btn_next.getId())
         {
             if(et_cordinates.getText().toString().length() > 0) {
-                if (et_radius.getText().toString().length() > 0) {
-                    SharedPreferences sharedPreferences = getSharedPreferences("LocationBased",MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = getSharedPreferences("LocationBasedSms",MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("cordinates", et_cordinates.getText().toString());
-                    editor.putString("radius", et_radius.getText().toString());
                     editor.commit();
-                    Intent intent=new Intent(LocationBasedService.this,Service_Connection.class);
-                    startService(intent);
-                    et_radius.setText("");
-                    et_cordinates.setText("");
-                    expandorcollapseBottomSheet();
-                    Toast.makeText(this, "Saved Successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LocationBasedSms.this, LocationBasedSmsNext.class);
+                    startActivity(intent);
                     // Save it in Shared Preferences and Start Service if it was in radius then silent phone
 //                  // final AudioManager mode = (AudioManager) this.getSystemService(Context.AUDIO_SERVICE);
 //                  // mode.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                }
-                else
-                {
-                    Toast.makeText(this, "Enter Radius", Toast.LENGTH_SHORT).show();
-                }
+
             }
             else
             {
@@ -156,7 +117,6 @@ public class LocationBasedService extends FragmentActivity implements OnMapReady
             expandorcollapseBottomSheet();
         }
     }
-
 
     public void expandorcollapseBottomSheet() {
         if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
@@ -184,5 +144,16 @@ public class LocationBasedService extends FragmentActivity implements OnMapReady
                 .setDuration(300L)
                 .setInterpolator(new OvershootInterpolator(5.0F))
                 .start();
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title(latLng.latitude + " : " + latLng.longitude);
+        mMap.clear();
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.addMarker(markerOptions);
+        et_cordinates.setText(String.valueOf(latLng.latitude) + "/" + String.valueOf(latLng.longitude));
     }
 }

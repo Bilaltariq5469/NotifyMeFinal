@@ -26,7 +26,8 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
             road_condition,
             views_points,
             how_to_use,
-            logout;
+            logout,
+    get_direction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +57,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         road_condition = (CardView)findViewById(R.id.road_condition);
         views_points = (CardView)findViewById(R.id.view_points);
         how_to_use = (CardView)findViewById(R.id.how_to_use);
+        get_direction = (CardView)findViewById(R.id.get_direction);
         logout = (CardView)findViewById(R.id.logout);
     }
 
@@ -71,6 +73,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         views_points.setOnClickListener(this);
         how_to_use.setOnClickListener(this);
         logout.setOnClickListener(this);
+        get_direction.setOnClickListener(this);
     }
 
 
@@ -137,6 +140,12 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
             startActivity(loginintent);
             FirebaseAuth.getInstance().signOut();
             finish();
+        }
+        else if(get_direction.getId() == view.getId())
+        {
+            Toast.makeText(this, "Get Direction", Toast.LENGTH_SHORT).show();
+            Intent directionintent = new Intent(HomePageActivity.this, DirectionsActivity.class);
+            startActivity(directionintent);
         }
     }
 }
