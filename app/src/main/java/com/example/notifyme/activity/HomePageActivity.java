@@ -81,61 +81,61 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         if(set_alarm.getId() == view.getId())
         {
-            Toast.makeText(this, "Set Alarm", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Set Alarm", Toast.LENGTH_SHORT).show();
             Intent setalarm = new Intent(HomePageActivity.this, AlarmMainActivity.class);
             startActivity(setalarm);
         }
         else if(location_based_alarm.getId() == view.getId())
         {
-            Toast.makeText(this, "Location based alarm", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Location based alarm", Toast.LENGTH_SHORT).show();
             Intent locationbasedIntent = new Intent(HomePageActivity.this, LocationBasedService.class);
             startActivity(locationbasedIntent);
         }
         else if(mix_and_match.getId() == view.getId())
         {
-            Toast.makeText(this, "Mix and Match", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Mix and Match", Toast.LENGTH_SHORT).show();
             Intent mixMatch = new Intent(HomePageActivity.this, MixandMatchActivity.class);
             startActivity(mixMatch);
         }
         else if(send_message.getId() == view.getId())
         {
-            Toast.makeText(this, "Send Message", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Send Message", Toast.LENGTH_SHORT).show();
             Intent sendMessage = new Intent(HomePageActivity.this, SendMessage.class);
             startActivity(sendMessage );
         }
         else if(location_based_sms.getId() == view.getId())
         {
-            Toast.makeText(this, "Location based Sms", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Location based Sms", Toast.LENGTH_SHORT).show();
             Intent locationbasedsendMessage = new Intent(HomePageActivity.this, LocationBasedSms.class);
             startActivity(locationbasedsendMessage);
         }
         else if(view.getId() == track_points.getId())
         {
-            Toast.makeText(this, "Track Points", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Track Points", Toast.LENGTH_SHORT).show();
             Intent trackpointsIntent = new Intent(HomePageActivity.this, TrackPointsMaps.class);
             startActivity(trackpointsIntent);
         }
         else if(view.getId() == road_condition.getId())
         {
-            Toast.makeText(this, "Road Condition", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Road Condition", Toast.LENGTH_SHORT).show();
             Intent roadConditionIntent = new Intent(HomePageActivity.this, RoadConditionMaps.class);
             startActivity(roadConditionIntent);
         }
         else if(view.getId() == views_points.getId())
         {
-            Toast.makeText(this, "View Points", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "View Points", Toast.LENGTH_SHORT).show();
             Intent viewpointsintent = new Intent(HomePageActivity.this, ViewPointsMaps.class);
             startActivity(viewpointsintent);
         }
         else if(how_to_use.getId() == view.getId())
         {
-            Toast.makeText(this, "How to Use", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "How to Use", Toast.LENGTH_SHORT).show();
             Intent howtouseintent = new Intent(HomePageActivity.this, HowToUse.class);
             startActivity(howtouseintent);
         }
         else if(logout.getId() == view.getId())
         {
-            Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
             Intent loginintent = new Intent(HomePageActivity.this, LoginActivity.class);
             startActivity(loginintent);
             FirebaseAuth.getInstance().signOut();
@@ -143,7 +143,7 @@ public class HomePageActivity extends AppCompatActivity implements View.OnClickL
         }
         else if(get_direction.getId() == view.getId())
         {
-            Toast.makeText(this, "Get Direction", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Get Direction", Toast.LENGTH_SHORT).show();
             Intent directionintent = new Intent(HomePageActivity.this, DirectionsActivity.class);
             startActivity(directionintent);
         }
